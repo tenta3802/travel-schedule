@@ -1,6 +1,6 @@
 package com.eunoia.travelschdule.global.auth;
 
-import com.eunoia.travelschdule.domain.user.token.application.TokenProvider;
+import com.eunoia.travelschdule.domain.token.application.TokenProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
