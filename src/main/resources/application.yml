@@ -2,11 +2,13 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/travel
-    platform: postgres
     username: postgres
     password: 1234
   profiles:
     include: oauth
+  sql:
+    init:
+      platform: postgres
 
   jpa:
     hibernate:
@@ -20,6 +22,15 @@ spring:
     redis:
       host: localhost
       port: 6380
+
+    devtools:
+      livereload:
+        enabled: true
+    resources:
+      static-locations: file:src/main/resources/static/
+    thymeleaf:
+      cache: false
+      prefix: file:src/main/resources/templates/
 
 jwt:
   key: c3ByaW5nLWJvb3QtYXBpLWp3dC1zZWNyZXQta2V5LXN1cGVyLXNlY3JldC15ZXMteWVzLXllcy0yNAo=

@@ -13,9 +13,16 @@ public class CustomLoginController {
         return "login";
     }
 
-    @GetMapping("/auth/success")
-    public String loginSuccessPage(@RequestParam(value = "accessToken", required = false) String accessToken, Model model) {
-        model.addAttribute("accessToken", accessToken);
-        return "login-success";
+    @GetMapping("/login/success")
+    public String kakaoCallback(@RequestParam(value = "token") String token, Model model) {
+        model.addAttribute("accessToken", token);
+        return "/login-success";
     }
+
+    @GetMapping("/")
+    public String home() {
+        return "home";
+    }
+
+
 }
