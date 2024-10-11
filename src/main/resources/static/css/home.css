@@ -1,0 +1,18 @@
+.profile {
+    display: flex;
+    height: 600px;
+}
+
+.profile-img {
+    width: 50px;
+    height: auto;
+}
+
+.profile-info {
+    display: flex;
+    margin-right: 130px;
+}
+
+.update-btn {
+    color: forestgreen;
+}

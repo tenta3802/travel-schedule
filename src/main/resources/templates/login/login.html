@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=375, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <script src="/js/kakaoLogin.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+    <div>
+        <h4 class="title">TRIP PLANNER</h4>
+    </div>
+    <a class="logo" href="#" onclick="openKakaoLogin(); return false;">
+        <img th:src="@{/images/kakao-login.png}">
+    </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <script src="/js/home.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <div class="profile">
+        <div class="profile-info">
+            <div>
+                <img class="profile-img" src="/images/profile.png">
+            </div>
+            <div>
+                <div id="userInfo"></div>
+            </div>
+        </div>
+        <div>
+            <h5 class="update-btn">프로필 수정</h5>
+        </div>
+    </div>
+</div>
+</body>
+</html>

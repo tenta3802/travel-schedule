@@ -1,0 +1,10 @@
+.title {
+    opacity: 0.6;
+    height: 30px;
+    color: darkgreen;
+    font-size: larger;
+}
+
+.logo {
+    height: 400px;
+}

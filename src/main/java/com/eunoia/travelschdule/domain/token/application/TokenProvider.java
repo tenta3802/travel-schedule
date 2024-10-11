@@ -3,10 +3,7 @@ package com.eunoia.travelschdule.domain.token.application;
 import com.eunoia.travelschdule.domain.token.domain.Token;
 import com.eunoia.travelschdule.global.error.CustomExpectedException;
 import com.eunoia.travelschdule.global.error.ErrorCode;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
 import jakarta.annotation.PostConstruct;
@@ -61,11 +58,11 @@ public class TokenProvider {
                 .collect(Collectors.joining());
 
         return Jwts.builder()
-                .subject(authentication.getName())
+                .setSubject(authentication.getName())
                 .claim(KEY_ROLE, authorities)
-                .issuedAt(now)
-                .expiration(expiredDate)
-                .signWith(secretKey, Jwts.SIG.HS512)
+                .setIssuedAt(now)
+                .setExpiration(expiredDate)
+                .signWith(secretKey, SignatureAlgorithm.HS512)
                 .compact();
     }
 
@@ -80,6 +77,13 @@ public class TokenProvider {
     private List<SimpleGrantedAuthority> getAuthorities(Claims claims) {
         return Collections.singletonList(new SimpleGrantedAuthority(
                 claims.get(KEY_ROLE).toString()));
+    }
+
+    public Claims getAllClaimsFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     public String reissueAccessToken(String accessToken) {
@@ -107,10 +111,13 @@ public class TokenProvider {
 
     private Claims parseClaims(String token) {
         try {
-            return Jwts.parser().verifyWith(secretKey).build()
-                    .parseSignedClaims(token).getPayload();
+            return Jwts.parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
         } catch (ExpiredJwtException e) {
-            return e.getClaims();
+            throw new CustomExpectedException(ErrorCode.TOKEN_EXPIRED);
         } catch (MalformedJwtException e) {
             throw new CustomExpectedException(ErrorCode.INVALID_TOKEN);
         } catch (SecurityException e) {

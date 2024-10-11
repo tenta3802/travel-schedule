@@ -1,7 +1,10 @@
 package com.eunoia.travelschdule.global.config;
 
+import com.eunoia.travelschdule.domain.token.application.TokenProvider;
 import com.eunoia.travelschdule.domain.user.application.Oauth2UserService;
+import com.eunoia.travelschdule.domain.user.security.PrincipalDetailService;
 import com.eunoia.travelschdule.global.auth.OAuth2SuccessHandler;
+import com.eunoia.travelschdule.global.filter.JwtAuthenticationFilter;
 import com.eunoia.travelschdule.global.security.CustomAccessDeniedHandler;
 import com.eunoia.travelschdule.global.security.CustomAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +16,17 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final TokenProvider tokenProvider;
     private final Oauth2UserService oAuth2UserService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    private final PrincipalDetailService principalDetailService;
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -42,17 +48,21 @@ public class SecurityConfig {
                         request.requestMatchers(
                                         new AntPathRequestMatcher("/"),
                                         new AntPathRequestMatcher("/images/**"),
+                                        new AntPathRequestMatcher("/css/**"),
+                                        new AntPathRequestMatcher("/js/**"),
                                         new AntPathRequestMatcher("/auth/success"),
                                         new AntPathRequestMatcher("/login/**")
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 )
+                .addFilterBefore(new JwtAuthenticationFilter(tokenProvider, principalDetailService), UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login(oauth ->
                         oauth.userInfoEndpoint(user -> user.userService(oAuth2UserService))
                                 .successHandler(oAuth2SuccessHandler)
                 ).exceptionHandling((exceptions) -> exceptions
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-                        .accessDeniedHandler(new CustomAccessDeniedHandler()));;
+                        .accessDeniedHandler(new CustomAccessDeniedHandler()));
+        ;
         return http.build();
     }
 }

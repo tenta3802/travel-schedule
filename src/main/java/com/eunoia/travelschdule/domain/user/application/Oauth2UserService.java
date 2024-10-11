@@ -21,6 +21,7 @@ public class Oauth2UserService extends DefaultOAuth2UserService {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
         Map<String, Object> oAuth2UserAttributes = super.loadUser(userRequest).getAttributes();
@@ -37,7 +38,6 @@ public class Oauth2UserService extends DefaultOAuth2UserService {
         return new PrincipalDetails(user, oAuth2UserAttributes, userNameAttributeName);
     }
 
-    @Transactional
     private User getOrSave(OAuth2UserInfo oAuth2UserInfo) {
         Optional<User> user = userRepository.findByEmail(oAuth2UserInfo.email());
 

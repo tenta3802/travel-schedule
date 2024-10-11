@@ -10,7 +10,9 @@ public enum ErrorCode {
 
     TOKEN_EXPIRED("토큰이 만료되었습니다.", HttpStatus.UNAUTHORIZED),
     INVALID_TOKEN("올바르지 않은 토큰입니다.", HttpStatus.UNAUTHORIZED),
-    INVALID_JWT_SIGNATURE("잘못된 JWT 시그니처입니다.", HttpStatus.UNAUTHORIZED);
+    INVALID_JWT_SIGNATURE("잘못된 JWT 시그니처입니다.", HttpStatus.UNAUTHORIZED),
+
+    USER_NOT_FOUND("사용자 정보가 존재하지 않습니다", HttpStatus.NOT_FOUND);
 
     private final String message;
     private final HttpStatus status;
