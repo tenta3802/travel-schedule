@@ -10,9 +10,27 @@
 
 .profile-info {
     display: flex;
-    margin-right: 130px;
+    margin-right: 150px;
 }
 
 .update-btn {
     color: forestgreen;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.userInfo {
+    margin-left: 10px;
+    margin-top: 7px;
+    font-size: 13px;
+}
+
+#userInfo-bottom {
+    display: flex;
+    margin-top: 5px;
+    color: darkgray;
+}
+
+#userInfo-bottom > div {
+    margin-right: 5px;
 }
