@@ -1,6 +1,6 @@
 .profile {
+    margin-top: 40px;
     display: flex;
-    height: 600px;
 }
 
 .profile-img {
@@ -10,9 +10,72 @@
 
 .profile-info {
     display: flex;
-    margin-right: 130px;
+    margin-right: 180px;
 }
 
 .update-btn {
     color: forestgreen;
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.userInfo {
+    margin-left: 10px;
+    margin-top: 7px;
+    font-size: 13px;
+}
+
+#userInfo-top {
+    font-weight: bold;
+}
+
+#userInfo-bottom {
+    display: flex;
+    margin-top: 5px;
+    color: darkgray;
+}
+
+#userInfo-bottom > div {
+    margin-right: 5px;
+}
+
+.plan-title {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #d3d3d3;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+.plan-body {
+    margin-bottom: 20px;
+    font-size: 13px;
+    text-align: center;
+}
+
+#default-main {
+    font-weight: bold;
+    opacity: 0.6;
+}
+
+#default-sub {
+    font-size: 11px;
+    padding-top: 5px;
+    opacity: 0.6;
+}
+
+.plan-btn {
+    margin-bottom: 400px;
+    border-radius: 13px;
+    background-color: forestgreen;
+    font-size: 12px;
+    color: whitesmoke;
+    padding: 14px 40px;
+    cursor: pointer;
 }
